@@ -38,7 +38,7 @@ def valid_signup():
 
     else:
          if len(username) < 3 or len(username) > 20:
-            username_error = 'Invaild username'
+            username_error = 'Please enter between 3 and 20 characters'
 
 
     if password_input == '':
@@ -47,7 +47,7 @@ def valid_signup():
     else:
         
          if len(password_input) < 3 or len(password_input) > 20:
-            password_error = 'Invaild password'
+            password_error = 'Please enter between 3 and 20 characters'
             
 
     if password_input != password_verify:
@@ -58,18 +58,18 @@ def valid_signup():
         email = email
     else:
         if len(email) < 3 or len(email) > 20:
-         email_error = 'invaild email'
+         email_error = 'invalid email'
     
     if not username_error and not password_error:
         username = username
-        return redirect('/vaild-signup?username={0}'.format(username))
+        return redirect('/valid-signup?username={0}'.format(username))
     else:
         template = jinja_env.get_template('base.html')
         return template.render( username=username, password_error=password_error, username_error=username_error, password_input=password_input, password_verify_error=password_verify_error,email_error=email_error) 
         
 
 
-@app.route('/vaild-signup')
+@app.route('/valid-signup')
 def vaild_signup():
     username = request.args.get('username')
     return render_template('enter.html', username=username)
